@@ -18,17 +18,18 @@ int main() {
     int shippingInt;
 
     // greet user
-    std::cout <<"Welcome to TateXpress Shipping \n";
+    std::cout <<"Welcome to TateXpress Shipping \n\n";
+    std::cout <<"Note, the company has a weight and volume limit of 27kg and 10000cm³ \n\n";
 
     // get user's package dimensions
     std::cout <<"Please enter you package dimensions \n";
-    std::cout <<"Enter the weight in kg: ";
+    std::cout <<"Enter the weight as kg: ";
     std::cin >> pWeight;
-    std::cout <<"Enter the length in cm: ";
+    std::cout <<"Enter the length as cm: ";
     std::cin >> pLength;
-    std::cout <<"Enter the width in cm: ";
+    std::cout <<"Enter the width as cm: ";
     std::cin >> pWidth;
-    std::cout <<"Enter the height in cm: ";
+    std::cout <<"Enter the height as cm: ";
     std::cin >> pHeight;
 
     // try to cast dimensions to decimals
@@ -45,29 +46,40 @@ int main() {
         std::cout <<"Your package weighs " << std::fixed;
         std::cout << std::setprecision(2) << weightF;
         std::cout <<"kg and has a volume of " <<std::fixed;
-        std::cout << std::setprecision(2) << volumeInt <<"cm³\n";
+        std::cout << std::setprecision(2) << volumeInt <<"cm³\n\n";
 
-        if (weightF >= 27 || volumeInt >= 10000) {
+        if (weightF > 27 || volumeInt >= 10000) {
             std::cout <<"Your package exceeds company";
             std::cout <<"weight and volume limits\n";
+        } else if (weightF < 0) {
+            std::cout <<"Weight can not be a negative";
+        } else if (lengthF <0){
+            std::cout <<"Length can not be a negative";
+        } else if (widthF < 0) {
+            std::cout <<"width can not be a negative";
         } else {
             // let user select shipping method
-            std::cout <<"Next, please select your shipping method \n";
-            std::cout <<"1 for truck, 2 for cargo and 3 for plane: ";
+            std::cout <<"Next, please select your shipping method \n\n";
+            std::cout <<"Plane maximum weigth limit is 10kg \n";
+            std::cout <<"Truck maximum weight limit is 15kg \n";
+            std::cout <<"Cargo maximum weight limit is 27kg \n\n";
+            std::cout <<"1 for plane, 2 for truck and 3 for cargo: ";
             std::cin >> shipping;
         } try {
             shippingInt = std::stoi(shipping);
 
             // check if package is eligable for selected shipping method
-            if (shippingInt == 1 && weightF <= 10) {
-                std::cout <<"Your package can be delivered by truck \n";
-                std::cout <<"Expect delivery in 3-5 business days!";
-            } else if (shippingInt == 2 && weightF <= 20) {
-                std::cout <<"You package can be delivered by cargo \n";
-                std::cout <<"Expect delivery in 3-5 business days!";
-            } else if (shippingInt == 3 && weightF <= 27) {
+            if (shippingInt == 1 && weightF <= 15) {
                 std::cout <<"Your package can be delivered by plane \n";
-                std::cout <<"Expect delivery in 3-5 business days!";
+                std::cout <<"Expect delivery in 3-5 business days! \n";
+            } else if (shippingInt == 2 && weightF <= 27) {
+                std::cout <<"Your package can be delivered by truck \n";
+                std::cout <<"Expect delivery in 3-5 business days! \n";
+            } else if (shippingInt == 3 && weightF <= 20) {
+                std::cout <<"Your package can be delivered by cargo \n";
+                std::cout <<"Expect delivery in 3-5 business days! \n";
+            } else if (shippingInt > 3) {
+                std::cout <<"Please select the given options \n";
             } else {
                 std::cout <<"Your package is too heavy for";
                 std::cout <<" the shipping method \n";
